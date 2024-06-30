@@ -21,3 +21,7 @@ spring:
           uri: http://localhost:3003
           predicates:
             - Path=/api/users/**
+        - id: microservices-reports
+          uri: http://localhost:3004
+          predicates:
+            - Path=/api/reports/**

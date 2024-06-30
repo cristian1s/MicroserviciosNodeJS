@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: microservice-gateway
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      routes:
+        - id: microservice-client
+          uri: http://localhost:3001
+          predicates:
+            - Path=/api/clients/**
+        - id: microservice-product
+          uri: http://localhost:3002
+          predicates:
+            - Path=/api/products/**
+        - id: microservices-users
+          uri: http://localhost:3003
+          predicates:
+            - Path=/api/users/**

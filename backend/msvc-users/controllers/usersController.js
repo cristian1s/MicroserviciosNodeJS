@@ -62,10 +62,41 @@ const deleteUsers = async (req, res) => {
   }
 };
 
+const validateUser = async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const user = await Users.findOne({ where: { username, password } });
+    if (user) {
+      res.json({ valid: true, user });
+    } else {
+      res.json({ valid: false });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getUser = async (req, res) => {
+  try {
+    const query = req.query;
+    const user = await Users.findOne({ where: query });
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 module.exports = {
   getAllusers,
   getUsersById,
   createUsers,
   updateUsers,
   deleteUsers,
+  validateUser,
+  getUser,
 };

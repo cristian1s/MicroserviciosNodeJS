@@ -29,3 +29,7 @@ spring:
           uri: http://localhost:3000
           predicates:
             - Path=/api/auth/**
+        - id: microservices-sales
+          uri: http://localhost:3005
+          predicates:
+            - Path=/api/ventas/**
